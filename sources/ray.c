@@ -1,0 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/25 17:53:22 by sstench           #+#    #+#             */
+/*   Updated: 2020/11/25 19:24:24 by sstench          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
+
+void		init_ray(t_ray *r, t_env env)
+{
+	if (!(r->t = (double*)malloc(sizeof(double) * env.objcount))) // При инициализации выделяем память с учётом того что луч встретит каждый объект в сцене
+		put_error("Ray memory allocation fail");
+	if (!(r->col = (t_rgb*)malloc(sizeof(t_rgb) * env.objcount))) // Выделяем память под информацию о цвете который находится на луче
+		put_error("Ray memory allocation fail");
+	r->start = vec_cpy(env.cam.pos);  // Начальной точкой каждого вектора будет расположение камеры
+}
+
+double		get_t(double a, double b, double d)
+{
+	double	t1;
+	double	t2;
+
+	t1 = (-b - sqrt(d)) / (2 * a);
+	t2 = (-b + sqrt(d)) / (2 * a);
+	if ((t1 <= t2 && t1 >= 0) || (t1 >= 0 && t2 < 0))
+		return (t1);
+	if ((t2 <= t1 && t2 >= 0) || (t2 >= 0 && t1 < 0))
+		return (t2);
+	return (-1);
+}
+
+int			find_closest(t_ray r, t_env env)
+{
+	int		id;
+	int		i;
+
+	id = -1;
+	i = -1;
+	while (++i < env.objcount) // Находим id ближайшего объекта
+	{
+		if (r.t[i] >= 0 && (id == -1 || r.t[i] < r.t[id]))
+			id = i;
+	}
+	return (id);
+}
+
+void		trace_ray(t_ray *r, t_env env)
+{
+	int		i;
+
+	i = -1;
+	while (++i < env.objcount) // Для каждого объекта на сцене определяем цвет 
+		r->t[i] = env.obj[i].get_col(*r, &r->col[i], i, &env);
+	r->id = find_closest(*r, env); // Записываем в структуру луча объект над которым он работает
+}
+
+void		comp_ray(t_ray *r, t_vec n, double t)
+{
+	if (r->id == -1)
+		return ;
+	r->n = vec_cpy(n);
+	r->end = vec_add(r->start, vec_scale(r->dir, t));
+	r->rv = vec_sub(r->dir, vec_scale(r->n, 2.0 * vec_dot(r->dir, r->n)));
+}
