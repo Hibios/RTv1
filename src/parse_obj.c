@@ -62,7 +62,7 @@ void	parse_obj(t_obj *obj, char **sl)
 		obj->r = obj->r > 999999 ? 999999 : obj->r;
 	}
 	if (ft_strequ(sl[0], "cone:"))
-		obj->r = tan(DTR(obj->r));
+		obj->r = tan(vec_dtr(obj->r));
 }
 
 void	obj_push_back(t_env *env, char **sl)

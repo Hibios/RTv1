@@ -8,3 +8,4 @@ RTv1
 *.so
 .idea
 cmake-build-debug
+obj

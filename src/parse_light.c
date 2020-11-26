@@ -26,8 +26,11 @@ void	parse_light(t_light *light, char **sl)
 		parse_error(NOT_ENOUGH_DATA);
 	if (!is_valid_nb(sl[2]))
 		parse_error(WRONG_CHARACTER);
-	light->intensity = ABS(ft_atoi(sl[2]));
-	light->intensity = (int)light->intensity % 101;
+	light->intensity = ft_atoi(sl[2]);
+	if (light->intensity < 0)
+		light->intensity = 0;
+	else if (light->intensity > 100)
+		light->intensity = 100;
 	light->intensity /= 100;
 	light->col.bgra[0] = 0xff * light->intensity;
 	light->col.bgra[1] = 0xff * light->intensity;
@@ -41,8 +44,11 @@ void	parse_ambient(t_env *env, char **sl)
 		parse_error(NOT_ENOUGH_DATA);
 	if (!is_valid_nb(sl[1]))
 		parse_error(WRONG_CHARACTER);
-	env->ambient.intensity = ABS(ft_atoi(sl[1]));
-	env->ambient.intensity = (int)env->ambient.intensity % 101;
+	env->ambient.intensity = ft_atoi(sl[1]);
+	if (env->ambient.intensity < 0)
+		env->ambient.intensity = 0;
+	else if (env->ambient.intensity > 100)
+		env->ambient.intensity = 100;
 	env->ambient.intensity /= 100;
 	env->ambient.col.bgra[0] = 0xff * env->ambient.intensity;
 	env->ambient.col.bgra[1] = 0xff * env->ambient.intensity;
@@ -53,7 +59,7 @@ void	parse_ambient(t_env *env, char **sl)
 void	light_push_back(t_env *env, char **sl)
 {
 	t_light	lt;
-	t_light *tmp;
+	t_light	*tmp;
 	int		i;
 
 	parse_light(&lt, sl);

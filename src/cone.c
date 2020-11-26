@@ -12,6 +12,7 @@
 
 #include "rtv1.h"
 #include "libvec.h"
+#include "libft.h"
 
 t_vec		vec_cone_n(t_ray r, t_vec pt, double t, t_obj cone)
 {
@@ -43,7 +44,7 @@ double		t_cone(t_ray *r, t_obj cone)
 	c = vec_dot(x, cone.v);
 	c = vec_dot(x, x) - (1 + cone.r * cone.r) * c * c;
 	d = b * b - 4 * a * c;
-	d = DROUND(d);
+	d = ft_dround(d);
 	return (d = d < 0 ? -1 : get_t(a, b, d));
 }
 

@@ -25,9 +25,13 @@ int		is_valid_vec(char *str)
 
 int		is_valid_nb(char *str)
 {
+	if (*str == '-')
+		++str;
+	if (!*str)
+		return (0);
 	while (*str)
 	{
-		if (!ft_isdigit(*str) && *str != '-' && *str != '.')
+		if (!ft_isdigit(*str))
 			return (0);
 		str++;
 	}

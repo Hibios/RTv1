@@ -14,8 +14,8 @@
 
 t_vec		vec_rot_zyx(t_vec v, t_vec r)
 {
-	v = vec_rot_z(v, DTR(r.z));
-	v = vec_rot_y(v, DTR(r.y));
-	v = vec_rot_x(v, DTR(r.x));
+	v = vec_rot_z(v, vec_dtr(r.z));
+	v = vec_rot_y(v, vec_dtr(r.y));
+	v = vec_rot_x(v, vec_dtr(r.x));
 	return (v);
 }

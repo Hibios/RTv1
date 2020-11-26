@@ -12,6 +12,7 @@
 
 #include "rtv1.h"
 #include "libvec.h"
+#include "libft.h"
 
 t_vec		vec_cylinder_n(t_ray r, double t, t_obj cylinder)
 {
@@ -44,7 +45,7 @@ double		t_cylinder(t_ray *r, t_obj cylinder)
 	c = vec_dot(x, cylinder.v);
 	c = vec_dot(x, x) - c * c - cylinder.r * cylinder.r;
 	d = b * b - 4 * a * c;
-	d = DROUND(d);
+	d = ft_dround(d);
 	return (d = d < 0 ? -1 : get_t(a, b, d));
 }
 

@@ -15,8 +15,6 @@
 
 # include <math.h>
 
-# define DTR(k)	((double)k * (M_PI / 180))
-
 typedef struct	s_vec
 {
 	double		x;
@@ -40,5 +38,7 @@ t_vec			vec_rot_y(t_vec v, double a);
 t_vec			vec_rot_z(t_vec v, double a);
 t_vec			vec_rot_xyz(t_vec v, t_vec r);
 t_vec			vec_rot_zyx(t_vec v, t_vec r);
+
+double			vec_dtr(double k);
 
 #endif

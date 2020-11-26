@@ -19,8 +19,6 @@
 # include <limits.h>
 # include <fcntl.h>
 # define BUFF_SIZE 100000
-# define MAX(A, B) (A > B ? A : B)
-# define MIN(A, B) (A > B ? B : A)
 
 typedef	struct		s_list
 {
@@ -98,5 +96,7 @@ int					ft_elemcounter(char const *str, char c);
 int					get_next_line(const int fd, char **line);
 int					ft_atoi_base(const char *str, int str_base);
 double				ft_atod(char *str);
+double				ft_fabs(double d);
+double				ft_dround(double d);
 
 #endif

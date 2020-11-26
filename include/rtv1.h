@@ -23,9 +23,6 @@
 # define FOV_H		30
 # define PPD		935
 
-# define ABS(x)		(x) > 0 ? (x) : -(x)
-# define DROUND(d)	ABS(d) < 0.00001 ? 0 : (d)
-
 double			t_sphere(t_ray *r, t_obj sphere);
 double			col_sphere(t_ray r, t_rgb *col, int id, void *env);
 

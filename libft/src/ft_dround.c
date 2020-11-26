@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_rot_xyz.c                                      :+:      :+:    :+:   */
+/*   ft_dround.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 19:56:51 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 19:56:52 by sstench          ###   ########.fr       */
+/*   Created: 2020/11/26 16:50:47 by nalysann          #+#    #+#             */
+/*   Updated: 2020/11/26 16:50:49 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libvec.h"
+#include "libft.h"
 
-t_vec		vec_rot_xyz(t_vec v, t_vec r)
+double	ft_dround(double d)
 {
-	v = vec_rot_x(v, vec_dtr(r.x));
-	v = vec_rot_y(v, vec_dtr(r.y));
-	v = vec_rot_z(v, vec_dtr(r.z));
-	return (v);
+	return (ft_fabs(d) < 0.00001 ? 0.0 : d);
 }

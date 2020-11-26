@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_rot_xyz.c                                      :+:      :+:    :+:   */
+/*   vec_dtr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nalysann <urbilya@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 19:56:51 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 19:56:52 by sstench          ###   ########.fr       */
+/*   Created: 2020/11/26 16:52:51 by nalysann          #+#    #+#             */
+/*   Updated: 2020/11/26 16:52:55 by nalysann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libvec.h"
 
-t_vec		vec_rot_xyz(t_vec v, t_vec r)
+double	vec_dtr(double k)
 {
-	v = vec_rot_x(v, vec_dtr(r.x));
-	v = vec_rot_y(v, vec_dtr(r.y));
-	v = vec_rot_z(v, vec_dtr(r.z));
-	return (v);
+	return (k * (M_PI) / 180);
 }

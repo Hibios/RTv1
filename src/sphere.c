@@ -12,6 +12,7 @@
 
 #include "rtv1.h"
 #include "libvec.h"
+#include "libft.h"
 
 t_vec		vec_sphere_n(t_ray r, double d, t_vec cent)
 {
@@ -36,7 +37,7 @@ double		t_sphere(t_ray *r, t_obj sphere)
 	c = vec_dot(vec_sub(r->start, sphere.pos),
 		vec_sub(r->start, sphere.pos)) - sphere.r * sphere.r;
 	d = b * b - 4 * a * c;
-	d = DROUND(d);
+	d = ft_dround(d);
 	return (d < 0 ? -1 : get_t(a, b, d));
 }
 

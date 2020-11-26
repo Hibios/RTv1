@@ -27,7 +27,8 @@ SRC = vec_new.c \
       vec_rot_z.c \
       vec_cpy.c \
       vec_rot_xyz.c \
-      vec_rot_zyx.c
+      vec_rot_zyx.c \
+      vec_dtr.c
 
 INC_DIR = include
 
