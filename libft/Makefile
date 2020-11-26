@@ -6,23 +6,13 @@
 #    By: sstench <sstench@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/14 19:05:18 by sstench           #+#    #+#              #
-#    Updated: 2020/11/25 17:47:24 by sstench          ###   ########.fr        #
+#    Updated: 2020/11/26 15:57:59 by nalysann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+LIB = libft.a
 
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
-
-RM = rm -rf
-
-HEADER = libft.h
-
-SRC = *.c
-
-OBJ = $(SRC:.c=.o)
+SRC_DIR = src
 
 SRC = ft_isdigit.c ft_lstmap.c ft_memdel.c ft_putnbr.c ft_strcmp.c ft_strjoin.c \
 	ft_strncpy.c ft_strsub.c ft_isprint.c ft_lstnew.c ft_memmove.c ft_putnbr_fd.c \
@@ -36,41 +26,66 @@ SRC = ft_isdigit.c ft_lstmap.c ft_memdel.c ft_putnbr.c ft_strcmp.c ft_strjoin.c 
 	ft_strclr.c ft_striteri.c ft_strncmp.c ft_strstr.c ft_elemcounter.c get_next_line.c \
 	ft_atod.c ft_atoi_base.c
 
-OBJ = ft_isdigit.o ft_lstmap.o ft_memdel.o ft_putnbr.o ft_strcmp.o ft_strjoin.o \
-	ft_strncpy.o ft_strsub.o ft_isprint.o ft_lstnew.o ft_memmove.o ft_putnbr_fd.o \
-	ft_strcpy.o ft_strlcat.o ft_strnequ.o ft_strtrim.o ft_atoi.o ft_itoa.o \
-	ft_memalloc.o ft_memset.o ft_putstr.o ft_strdel.o ft_strlen.o ft_strnew.o \
-	ft_tolower.o ft_bzero.o ft_lstadd.o ft_memccpy.o ft_putchar.o ft_putstr_fd.o \
-	ft_strdup.o ft_strmap.o ft_strnstr.o ft_toupper.o ft_isalnum.o ft_lstdel.o \
-	ft_memchr.o ft_putchar_fd.o ft_strcat.o ft_strequ.o ft_strmapi.o ft_strrchr.o \
-	ft_isalpha.o ft_lstdelone.o ft_memcmp.o ft_putendl.o ft_strchr.o ft_striter.o \
-	ft_strncat.o ft_strsplit.o ft_isascii.o ft_lstiter.o ft_memcpy.o ft_putendl_fd.o \
-	ft_strclr.o ft_striteri.o ft_strncmp.o ft_strstr.o ft_elemcounter.o get_next_line.o \
-	ft_atod.o ft_atoi_base.o
+INC_DIR = include
 
-C_GREEN = \033[32m
-C_RED = \033[31m
-C_NONE = \033[0m
+OBJ_DIR = obj
 
-all: $(NAME)
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+DEP = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.d))
 
-$(NAME):
-	@$(CC) $(CFLAGS) -c $(SRC)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@printf "Libft:   %-24s$(GREEN)[done]$(C_NONE)\n" $@
+UNAME_S = $(shell uname -s)
 
-$(OBJ): %.o : %.c
-	@gcc $(CFLAGS) -c $<
-	@printf "Libft:   %-24s$(GREEN)[done]$(C_NONE)\n" $@
+ifeq ($(UNAME_S), Darwin)
+	CC = clang
+endif
+
+ifeq ($(UNAME_S), Linux)
+	CC = gcc
+endif
+
+CFLAGS += -Wall -Wextra -Werror \
+          $(addprefix -I , $(INC_DIR)) \
+          -MD \
+          -march=native -O2 -pipe
+
+RESET = \033[0;0m
+RED = \033[0;31m
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
+MAGENTA = \033[0;35m
+CYAN = \033[0;36m
+WHITE = \033[0;37m
+
+.PHONY: all clean flcean re
+
+all: $(LIB)
+
+$(LIB): $(OBJ)
+	@printf "$(BLUE)"
+	ar -cr $@ $?
+	ranlib $@
+	@printf "$(RESET)"
+
+$(OBJ_DIR):
+	@mkdir -p $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@printf "$(MAGENTA)"
+	$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(RESET)"
+
+include $(wildcard $(DEP))
 
 clean:
-	@$(RM) $(OBJ)
-	@printf "Libft:   %-24s$(C_RED)[done]$(C_NONE)\n" $@
+	@printf "$(RED)"
+	rm -rf $(OBJ_DIR)
+	@printf "$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
-	@printf "Libft:   %-24s$(C_RED)[done]$(C_NONE)\n" $@
+	@printf "$(RED)"
+	rm -f $(LIB)
+	@printf "$(RESET)"
 
 re: fclean all
 

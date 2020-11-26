@@ -1,0 +1,10 @@
+*.o
+*.d
+*.a
+*.out
+RTv1
+*.dSYM
+*.DS_Store
+*.so
+.idea
+cmake-build-debug
