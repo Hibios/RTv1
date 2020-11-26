@@ -6,7 +6,7 @@
 /*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:53:04 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 19:43:13 by sstench          ###   ########.fr       */
+/*   Updated: 2020/11/26 15:29:52 by sstench          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	parse_line(t_env *env, char **sl)
 		obj_push_back(env, sl);
 }
 
-void	parse_input(t_env *env, char *filename) // Функция принимает структуру сцены, среды, для наполнения данными из карты
+void	parse_input(t_env *env, char *filename)
 {
 	int		fd;
 	char	*line;
 	char	**sl;
 	int		gnlret;
 
-	default_env(env); // Настраиваем стандартную среду
+	default_env(env);
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		put_error("Cannot open the file");
 	while ((gnlret = get_next_line(fd, &line)))

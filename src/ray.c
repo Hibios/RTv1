@@ -6,7 +6,7 @@
 /*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:53:22 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 19:24:24 by sstench          ###   ########.fr       */
+/*   Updated: 2020/11/26 15:30:19 by sstench          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void		init_ray(t_ray *r, t_env env)
 {
-	if (!(r->t = (double*)malloc(sizeof(double) * env.objcount))) // При инициализации выделяем память с учётом того что луч встретит каждый объект в сцене
+	if (!(r->t = (double*)malloc(sizeof(double) * env.objcount)))
 		put_error("Ray memory allocation fail");
-	if (!(r->col = (t_rgb*)malloc(sizeof(t_rgb) * env.objcount))) // Выделяем память под информацию о цвете который находится на луче
+	if (!(r->col = (t_rgb*)malloc(sizeof(t_rgb) * env.objcount)))
 		put_error("Ray memory allocation fail");
-	r->start = vec_cpy(env.cam.pos);  // Начальной точкой каждого вектора будет расположение камеры
+	r->start = vec_cpy(env.cam.pos);
 }
 
 double		get_t(double a, double b, double d)
@@ -42,7 +42,7 @@ int			find_closest(t_ray r, t_env env)
 
 	id = -1;
 	i = -1;
-	while (++i < env.objcount) // Находим id ближайшего объекта
+	while (++i < env.objcount)
 	{
 		if (r.t[i] >= 0 && (id == -1 || r.t[i] < r.t[id]))
 			id = i;
@@ -55,9 +55,9 @@ void		trace_ray(t_ray *r, t_env env)
 	int		i;
 
 	i = -1;
-	while (++i < env.objcount) // Для каждого объекта на сцене определяем цвет 
+	while (++i < env.objcount)
 		r->t[i] = env.obj[i].get_col(*r, &r->col[i], i, &env);
-	r->id = find_closest(*r, env); // Записываем в структуру луча объект над которым он работает
+	r->id = find_closest(*r, env);
 }
 
 void		comp_ray(t_ray *r, t_vec n, double t)
