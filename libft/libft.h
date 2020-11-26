@@ -6,7 +6,7 @@
 /*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 20:14:36 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/24 17:46:43 by sstench          ###   ########.fr       */
+/*   Updated: 2020/11/26 15:31:43 by sstench          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ int					ft_elemcounter(char const *str, char c);
 int					get_next_line(const int fd, char **line);
 int					ft_atoi_base(const char *str, int str_base);
 double				ft_atod(char *str);
-
 
 #endif

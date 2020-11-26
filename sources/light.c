@@ -6,7 +6,7 @@
 /*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:51:53 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 17:51:53 by sstench          ###   ########.fr       */
+/*   Updated: 2020/11/26 15:28:21 by sstench          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ unsigned int	col_add(t_rgb c1, double i1, t_rgb c2, double i2)
 	res.bgra[2] = tmp > 0xff ? 0xff : tmp;
 	return (res.c);
 }
-
-/*
-**	in_shadow:
-**	if in shadow -> return -1
-**	else -> return dist
-*/
 
 int				in_shadow(t_ray sr, t_vec dest, t_env env)
 {

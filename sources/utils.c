@@ -6,7 +6,7 @@
 /*   By: sstench <sstench@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:53:36 by sstench           #+#    #+#             */
-/*   Updated: 2020/11/25 19:24:23 by sstench          ###   ########.fr       */
+/*   Updated: 2020/11/26 15:30:34 by sstench          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	free_double_string(char **sl)
 
 void	default_env(t_env *env)
 {
-	env->objcount = 0; // Объектов 0 по умолчанию
+	env->objcount = 0;
 	env->obj = NULL;
 	env->lightcount = 0;
-	env->light = NULL; // Освещения нет
-	env->ambient.intensity = 0.2; //  по умолчанию
-	env->ambient.col.bgra[0] = 0xff * env->ambient.intensity; // Прозрачность для каждого цвета
+	env->light = NULL;
+	env->ambient.intensity = 0.2;
+	env->ambient.col.bgra[0] = 0xff * env->ambient.intensity;
 	env->ambient.col.bgra[1] = 0xff * env->ambient.intensity;
 	env->ambient.col.bgra[2] = 0xff * env->ambient.intensity;
 	env->cam.pos = vec_new(0, 0, 0);
